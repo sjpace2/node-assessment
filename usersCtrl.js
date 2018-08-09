@@ -51,5 +51,40 @@ module.exports = {
             return user.type !== "admin"
         })
         res.status(200).send(filteredUsers)
-    }
+    }, 
+
+    getByUserType: (req, res) => {
+        const {userType} = req.params;
+        let filteredUsers = userData.filter(user=>{
+            return user.type === userType
+        })
+        res.status(200).send(filteredUsers)
+    },
+
+    updateUser: (req, res) => {
+        const {userId} = req.params;
+      
+        for(let i=0; i<userData.length; i++){
+            if(userData[i].id === +userId){
+                userData[i].first_name = req.body.first_name
+                userData[i].last_name = req.body.last_name
+                userData[i].email = req.body.email
+                userData[i].gender = req.body.gender
+                userData[i].language = req.body.language
+                userData[i].age = req.body.age
+                userData[i].city = req.body.city
+                userData[i].state = req.body.state
+                userData[i].type = req.body.type
+                userData[i].favorites = req.body.favorites
+            }
+        }res.status(200).send(userData)
+    },
+
+    createUser: (req, res) => {
+        let newUser = {id: userData.length + 1, ...req.body}
+        userData.push(newUser)
+        res.status(200).send(userData)
+    },
+    
+    
 }
