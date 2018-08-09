@@ -29,5 +29,27 @@ module.exports = {
        else{
         res.status(200).send(userData)
        }
+    },
+
+    getUserById: (req, res) => {
+        const {id} = req.params;
+        let filteredUsers = userData.filter(user=>{
+            return user.id === +id
+        })
+        res.status(200).send(filteredUsers)
+    },
+
+    getAdmins: (req, res) => {
+        let filteredUsers = userData.filter(user=>{
+            return user.type === "admin"
+        })
+        res.status(200).send(filteredUsers)
+    },
+
+    getNonAdmins: (req, res) => {
+        let filteredUsers = userData.filter(user=>{
+            return user.type !== "admin"
+        })
+        res.status(200).send(filteredUsers)
     }
 }
