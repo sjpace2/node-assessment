@@ -15,6 +15,7 @@ app.get('/api/nonadmins', usersCtrl.getNonAdmins)
 app.get('/api/user_type/:userType', usersCtrl.getByUserType)
 app.put('/api/users/:userId', usersCtrl.updateUser)
 app.post('/api/users', usersCtrl.createUser)
+app.delete('/api/users/:userId', usersCtrl.deleteUser)
 
 app.listen(port, () => {
     console.log('listening on port', port)

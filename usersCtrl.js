@@ -36,7 +36,11 @@ module.exports = {
         let filteredUsers = userData.filter(user=>{
             return user.id === +id
         })
-        res.status(200).send(filteredUsers)
+        if(filteredUsers[0]){
+        res.status(200).send(filteredUsers[0])
+        }else{
+            res.status(404).json(null)
+        }
     },
 
     getAdmins: (req, res) => {
@@ -86,5 +90,13 @@ module.exports = {
         res.status(200).send(userData)
     },
     
-    
+    deleteUser: (req, res) => {
+        const {userId} = req.params
+        for(let i = 0; i<userData.length; i++){
+            if(userData[i].id === +userId){
+                userData.splice(i, 1)
+            }
+        }
+        res.status(200).send(userData)
+    }
 }
